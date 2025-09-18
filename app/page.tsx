@@ -1,15 +1,15 @@
 "use client";
 
-import useUser from "@/hooks/useUser";
+import useUserStore from "@/store/userStore";
 import Link from "next/link";
 
 
 export default function Home() {
-  const { user } = useUser();
+  const user = useUserStore((state) => state.user);
 
   return (
     <div className="container mx-auto flex h-screen w-full justify-center items-center gap-6">
-      {user ? (
+      {user.email ? (
         ""
       ) : (
         <Link

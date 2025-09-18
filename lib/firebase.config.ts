@@ -10,7 +10,6 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// what is getApp()
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

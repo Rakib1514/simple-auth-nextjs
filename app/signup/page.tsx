@@ -6,9 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 function Signup() {
-
-
-  
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,7 +28,6 @@ function Signup() {
       console.log(error);
     }
   };
-
 
   return (
     <div>

@@ -1,21 +1,18 @@
 "use client";
 
 import { auth } from "@/lib/firebase.config";
+import useUserStore from "@/store/userStore";
+import { User } from "@/types";
 import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type user = {
-  email: string;
-  uid: string;
-  displayName: string;
-  photoURL: string;
-};
-
 function Dashboard() {
-  const [user, setUser] = useState<user | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const userState = useUserStore(state=> state.user);
+  console.log(userState);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -52,10 +49,17 @@ function Dashboard() {
 
       <div className="flex justify-center items-center gap-6 my-4">
         <Link href={"/"}>
-          <button className="py-2 px-4 bg-gray-600 text-white rounded-sm cursor-pointer">Home</button>
+          <button className="py-2 px-4 bg-gray-600 text-white rounded-sm cursor-pointer">
+            Home
+          </button>
         </Link>
 
-        <button onClick={handleSignOut} className="py-2 px-4 border border-gray-600 text-white rounded-sm cursor-pointer">Sign out</button>
+        <button
+          onClick={handleSignOut}
+          className="py-2 px-4 border border-gray-600 text-white rounded-sm cursor-pointer"
+        >
+          Sign out
+        </button>
       </div>
 
       <h2 className="text-center">Hello, {user.displayName || user.email}</h2>
